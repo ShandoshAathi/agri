@@ -1,0 +1,15 @@
+{
+  "short_name": "AgriSense AI",
+  "name": "AgriSense AI Smart Farming Platform",
+  "icons": [
+    {
+      "src": "logo.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    }
+  ],
+  "start_url": ".",
+  "background_color": "#0b1320",
+  "theme_color": "#10b981",
+  "display": "standalone"
+}
