@@ -1,13 +1,6 @@
 import React from 'react';
 import { useFarm } from '../context/FarmContext';
-import { 
-  Settings as SettingsIcon, 
-  Sliders, 
-  Globe, 
-  Moon, 
-  BellRing,
-  Save
-} from 'lucide-react';
+import { Settings as SettingsIcon, Sliders, Globe } from 'lucide-react';
 
 export const Settings = () => {
   const { settings, setSettings } = useFarm();
@@ -86,6 +79,20 @@ export const Settings = () => {
             </div>
           </div>
         </div>
+
+        <button
+          onClick={() => {
+            const btn = document.getElementById('save-settings-btn');
+            if (btn) btn.innerText = '✓ System Configuration Saved!';
+            setTimeout(() => {
+              if (btn) btn.innerText = 'Save System Configuration';
+            }, 2000);
+          }}
+          id="save-settings-btn"
+          className="w-full py-3 rounded-2xl font-bold text-xs bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 text-slate-950 hover:from-emerald-400 hover:to-cyan-400 transition-all shadow-lg shadow-emerald-950/40 mt-4"
+        >
+          Save System Configuration
+        </button>
       </div>
     </div>
   );

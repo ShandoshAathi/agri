@@ -1,5 +1,5 @@
 import React from 'react';
-import { History, Droplets } from 'lucide-react';
+import { History } from 'lucide-react';
 
 export const IrrigationHistory = () => {
   const cycles = [

@@ -1,9 +1,11 @@
 import React from 'react';
 import { Zap, Power } from 'lucide-react';
 import { useTelemetry } from '../../context/TelemetryContext';
+import { useLanguage } from '../../context/LanguageContext';
 
 export const PumpStatus = () => {
   const { currentReading, togglePump } = useTelemetry();
+  const { t } = useLanguage();
   const isON = currentReading.pump_status === 'ON';
 
   return (
@@ -11,12 +13,12 @@ export const PumpStatus = () => {
       <div className="flex items-center justify-between text-xs text-slate-400 font-semibold">
         <span className="flex items-center space-x-2">
           <Zap className="w-4 h-4 text-emerald-400" />
-          <span>Solenoid Drip Pump Status</span>
+          <span>{t('Solenoid Drip Pump Status')}</span>
         </span>
         <span className={`px-2.5 py-1 rounded-full text-xs font-bold ${
           isON ? 'bg-emerald-950 text-emerald-400 border border-emerald-800' : 'bg-slate-800 text-slate-400'
         }`}>
-          {currentReading.pump_status}
+          {t(currentReading.pump_status)}
         </span>
       </div>
 
@@ -29,7 +31,7 @@ export const PumpStatus = () => {
         }`}
       >
         <Power className="w-4 h-4" />
-        <span>{isON ? 'Stop Solenoid Pump' : 'Start Solenoid Pump'}</span>
+        <span>{isON ? t('Stop Solenoid Pump') : t('Start Solenoid Pump')}</span>
       </button>
     </div>
   );

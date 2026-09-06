@@ -1,13 +1,6 @@
 import React from 'react';
 import { useFarm } from '../context/FarmContext';
-import { 
-  Bell, 
-  AlertTriangle, 
-  CheckCircle, 
-  Activity, 
-  Trash2, 
-  Check 
-} from 'lucide-react';
+import { Bell, AlertTriangle, CheckCircle, Activity, Trash2 } from 'lucide-react';
 
 export const Notifications = () => {
   const { notifications, markNotificationRead, clearAllNotifications } = useFarm();

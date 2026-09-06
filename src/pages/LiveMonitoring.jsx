@@ -1,18 +1,8 @@
 import React from 'react';
 import { useTelemetry } from '../context/TelemetryContext';
 import { useFarm } from '../context/FarmContext';
-import { 
-  Activity, 
-  Thermometer, 
-  Droplets, 
-  CloudRain, 
-  Waves, 
-  Cpu, 
-  Wifi, 
-  Zap,
-  CheckCircle,
-  Clock
-} from 'lucide-react';
+import { InteractiveFarmMap } from '../components/map/InteractiveFarmMap';
+import { Activity, Thermometer, Droplets, CloudRain, Waves, Cpu, Zap, Clock } from 'lucide-react';
 
 export const LiveMonitoring = () => {
   const { telemetry, togglePump } = useTelemetry();
@@ -183,6 +173,15 @@ export const LiveMonitoring = () => {
             </button>
           </div>
         </div>
+      </div>
+
+      {/* Spatial Field Contour & Grid Telemetry Map */}
+      <div className="space-y-3">
+        <h3 className="text-lg font-bold text-slate-100 flex items-center space-x-2">
+          <Activity className="w-5 h-5 text-emerald-400" />
+          <span>Spatial Field Contour & Node Placement Map</span>
+        </h3>
+        <InteractiveFarmMap farm={selectedFarm} height="480px" allowEdit={false} />
       </div>
 
       {/* Hardware Gateway Devices List */}

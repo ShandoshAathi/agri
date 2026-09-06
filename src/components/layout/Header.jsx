@@ -2,21 +2,9 @@ import React, { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { useFarm } from '../../context/FarmContext';
 import { useTelemetry } from '../../context/TelemetryContext';
-import { 
-  Bell, 
-  Wifi, 
-  Shield, 
-  UserCheck, 
-  CheckCircle, 
-  AlertTriangle, 
-  Activity, 
-  ChevronDown, 
-  LogOut,
-  Sparkles,
-  Layers
-} from 'lucide-react';
+import { Bell, Shield, UserCheck, CheckCircle, AlertTriangle, Activity, ChevronDown, LogOut, Sparkles, Layers } from 'lucide-react';
 
-export const Header = ({ currentPage, setCurrentPage }) => {
+export const Header = ({ _currentPage, setCurrentPage }) => {
   const { user, role, switchRole, logout } = useAuth();
   const { farms, selectedFarmId, setSelectedFarmId, notifications, markNotificationRead } = useFarm();
   const { telemetry } = useTelemetry();

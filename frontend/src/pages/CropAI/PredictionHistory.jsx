@@ -1,5 +1,5 @@
 import React from 'react';
-import { History, Sprout } from 'lucide-react';
+import { History } from 'lucide-react';
 
 export const PredictionHistory = () => {
   const history = [

@@ -1,5 +1,5 @@
 import React from 'react';
-import { MapPin, Sprout, Cpu, User, Activity, Layers, ArrowLeft } from 'lucide-react';
+import { MapPin, ArrowLeft } from 'lucide-react';
 
 export const FarmDetails = ({ farm, onBack }) => {
   if (!farm) return <div className="text-slate-400 text-sm">No farm selected.</div>;

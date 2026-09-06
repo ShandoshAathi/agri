@@ -1,8 +1,10 @@
 import React from 'react';
 import { Activity } from 'lucide-react';
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
+import { useLanguage } from '../../context/LanguageContext';
 
 export const SensorAnalytics = () => {
+  const { t } = useLanguage();
   const data = [
     { time: '08:00', moisture: 38, temp: 22 },
     { time: '10:00', moisture: 40, temp: 24 },
@@ -16,7 +18,7 @@ export const SensorAnalytics = () => {
       <div className="flex items-center justify-between">
         <h3 className="text-sm font-bold text-slate-200 uppercase tracking-wider flex items-center space-x-2">
           <Activity className="w-4 h-4 text-emerald-400" />
-          <span>Telemetry Moisture vs Temp Trend</span>
+          <span>{t('Telemetry Moisture vs Temp Trend')}</span>
         </h3>
       </div>
 

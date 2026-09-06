@@ -1,5 +1,5 @@
 import React from 'react';
-import { Sprout } from 'lucide-react';
+
 
 export const CropCard = ({ name, yieldEstimate, confidence }) => {
   return (

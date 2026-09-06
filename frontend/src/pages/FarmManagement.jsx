@@ -4,18 +4,24 @@ import {
   Tractor, 
   Plus, 
   MapPin, 
-  X
+  X,
+  Map as MapIcon,
+  Crosshair
 } from 'lucide-react';
+import { detectUserLocation } from '../services/weatherService';
+import { FarmMapPicker } from '../components/FarmMapPicker';
 
 export const FarmManagement = () => {
   const { farms, addFarm, setSelectedFarmId } = useFarm();
   const [showAddModal, setShowAddModal] = useState(false);
+  const [showMapPickerModal, setShowMapPickerModal] = useState(false);
+
   const [name, setName] = useState('');
   const [location, setLocation] = useState('');
   const [crop, setCrop] = useState('');
   const [size, setSize] = useState('');
   const [farmer, setFarmer] = useState('Elena Rostova');
-  const [soilType, setSoilType] = useState('Loamy Soil');
+  const [soilType, _setSoilType] = useState('Loamy Soil');
 
   const handleCreateFarm = (e) => {
     e.preventDefault();
@@ -36,23 +42,38 @@ export const FarmManagement = () => {
     setSize('');
   };
 
+  const handleMapSave = (locData) => {
+    setLocation(locData.formatted || `${locData.lat.toFixed(4)}°N, ${locData.lon.toFixed(4)}°E`);
+    setShowMapPickerModal(false);
+  };
+
   return (
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 glass-panel p-6 rounded-3xl border border-slate-800">
         <div>
           <h2 className="text-2xl font-bold text-slate-100 flex items-center space-x-2">
             <Tractor className="w-6 h-6 text-emerald-400" />
-            <span>Farm Management</span>
+            <span>Farm Management & Interactive Mapping</span>
           </h2>
-          <p className="text-xs text-slate-400 mt-1">Manage farm sectors, assign crop specialists, and inspect IoT node density.</p>
+          <p className="text-xs text-slate-400 mt-1">Manage farm sectors, assign crop specialists, and pinpoint exact field coordinates on the interactive map.</p>
         </div>
-        <button
-          onClick={() => setShowAddModal(true)}
-          className="px-4 py-2.5 rounded-xl text-xs font-bold bg-gradient-to-r from-emerald-500 to-teal-500 text-slate-950 hover:from-emerald-400 hover:to-teal-400 transition-all flex items-center space-x-2 shadow-lg shadow-emerald-500/20 self-start sm:self-auto"
-        >
-          <Plus className="w-4 h-4" />
-          <span>Add New Farm</span>
-        </button>
+        <div className="flex items-center space-x-2 self-start sm:self-auto">
+          <button
+            onClick={() => setShowMapPickerModal(true)}
+            className="px-4 py-2.5 rounded-xl text-xs font-bold bg-slate-900 hover:bg-slate-800 text-emerald-400 border border-slate-700 hover:border-emerald-500/50 transition-all flex items-center space-x-2 cursor-pointer shadow-md"
+          >
+            <MapIcon className="w-4 h-4 text-emerald-400" />
+            <span>Open Interactive Map</span>
+          </button>
+
+          <button
+            onClick={() => setShowAddModal(true)}
+            className="px-4 py-2.5 rounded-xl text-xs font-bold bg-gradient-to-r from-emerald-500 to-teal-500 text-slate-950 hover:from-emerald-400 hover:to-teal-400 transition-all flex items-center space-x-2 shadow-lg shadow-emerald-500/20 cursor-pointer"
+          >
+            <Plus className="w-4 h-4" />
+            <span>Add New Farm</span>
+          </button>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -93,17 +114,31 @@ export const FarmManagement = () => {
 
             <div className="flex items-center justify-between pt-2">
               <span className="text-[11px] text-slate-400">Established: {farm.established}</span>
-              <button
-                onClick={() => setSelectedFarmId(farm.id)}
-                className="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 hover:bg-slate-800 text-emerald-400 border border-slate-700 hover:border-emerald-500/50 transition-all"
-              >
-                Set Active Focus →
-              </button>
+              <div className="flex items-center space-x-2">
+                <button
+                  onClick={() => {
+                    setLocation(farm.location);
+                    setShowMapPickerModal(true);
+                  }}
+                  className="px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-700 hover:border-emerald-500/50 transition-all flex items-center space-x-1 cursor-pointer"
+                  title="Pinpoint this farm on map"
+                >
+                  <Crosshair className="w-3.5 h-3.5 text-rose-400" />
+                  <span>Pin Map</span>
+                </button>
+                <button
+                  onClick={() => setSelectedFarmId(farm.id)}
+                  className="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 hover:bg-slate-800 text-emerald-400 border border-slate-700 hover:border-emerald-500/50 transition-all cursor-pointer"
+                >
+                  Set Active Focus →
+                </button>
+              </div>
             </div>
           </div>
         ))}
       </div>
 
+      {/* Add New Farm Modal */}
       {showAddModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md">
           <div className="glass-panel p-6 rounded-3xl w-full max-w-md border border-slate-800 relative">
@@ -127,14 +162,37 @@ export const FarmManagement = () => {
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-300 mb-1">Location / Sector</label>
+                <div className="flex items-center justify-between mb-1">
+                  <label className="block text-xs font-semibold text-slate-300">Location / Sector</label>
+                  <div className="flex items-center space-x-2">
+                    <button
+                      type="button"
+                      onClick={() => setShowMapPickerModal(true)}
+                      className="text-[10px] text-teal-400 font-bold hover:underline flex items-center space-x-1 cursor-pointer"
+                    >
+                      <MapIcon className="w-3 h-3 text-teal-400" />
+                      <span>Pin on Map</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={async () => {
+                        const loc = await detectUserLocation();
+                        if (loc?.formatted) setLocation(loc.formatted);
+                      }}
+                      className="text-[10px] text-emerald-400 font-bold hover:underline flex items-center space-x-1 cursor-pointer"
+                    >
+                      <MapPin className="w-3.5 h-3.5 text-rose-400" />
+                      <span>Auto-GPS</span>
+                    </button>
+                  </div>
+                </div>
                 <input
                   type="text"
                   required
                   value={location}
                   onChange={(e) => setLocation(e.target.value)}
                   className="w-full glass-input rounded-xl px-3 py-2 text-xs"
-                  placeholder="e.g. South Ridge Block 4"
+                  placeholder="e.g. RS Puram Sector B, Coimbatore"
                 />
               </div>
 
@@ -179,7 +237,7 @@ export const FarmManagement = () => {
 
               <button
                 type="submit"
-                className="w-full py-3 rounded-xl text-xs font-bold bg-gradient-to-r from-emerald-500 to-teal-500 text-slate-950 hover:from-emerald-400 hover:to-teal-400 transition-all mt-2"
+                className="w-full py-3 rounded-xl text-xs font-bold bg-gradient-to-r from-emerald-500 to-teal-500 text-slate-950 hover:from-emerald-400 hover:to-teal-400 transition-all mt-2 cursor-pointer"
               >
                 Create Farm
               </button>
@@ -187,6 +245,20 @@ export const FarmManagement = () => {
           </div>
         </div>
       )}
+
+      {/* Interactive Map Pin Dropper Modal */}
+      {showMapPickerModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/85 backdrop-blur-md animate-in fade-in duration-200">
+          <div className="w-full max-w-4xl max-h-[95vh] overflow-y-auto">
+            <FarmMapPicker
+              initialArea={location || 'Coimbatore, Tamil Nadu'}
+              onSave={handleMapSave}
+              onClose={() => setShowMapPickerModal(false)}
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 };
+

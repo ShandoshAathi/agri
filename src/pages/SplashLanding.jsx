@@ -1,15 +1,5 @@
 import React from 'react';
-import { 
-  Sparkles, 
-  Activity, 
-  Sprout, 
-  Scan, 
-  Droplets, 
-  ShieldCheck, 
-  ArrowRight,
-  Cpu,
-  LineChart
-} from 'lucide-react';
+import { Sparkles, Activity, Sprout, Scan, Droplets, ArrowRight, Cpu } from 'lucide-react';
 
 export const SplashLanding = ({ onGetStarted, onLogin }) => {
   return (

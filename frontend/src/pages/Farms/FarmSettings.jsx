@@ -1,7 +1,7 @@
 import React from 'react';
-import { Settings, Cpu, ShieldAlert, CheckCircle } from 'lucide-react';
+import { Settings } from 'lucide-react';
 
-export const FarmSettings = ({ farm }) => {
+export const FarmSettings = ({ _farm }) => {
   return (
     <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-6">
       <div className="flex items-center space-x-3 border-b border-slate-800 pb-4">
@@ -29,7 +29,7 @@ export const FarmSettings = ({ farm }) => {
         <div className="flex items-center justify-between p-3 bg-slate-950/60 border border-slate-800 rounded-xl">
           <div>
             <span className="font-semibold block text-slate-200">Low Water Tank Alarm</span>
-            <span className="text-slate-400">Notify farm manager if water tank level falls below 20%</span>
+            <span className="text-slate-400">Notify _farm manager if water tank level falls below 20%</span>
           </div>
           <input type="checkbox" defaultChecked className="toggle-checkbox accent-emerald-500 w-4 h-4" />
         </div>

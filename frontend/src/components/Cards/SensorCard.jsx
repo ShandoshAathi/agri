@@ -1,5 +1,5 @@
 import React from 'react';
-import { Activity } from 'lucide-react';
+
 
 export const SensorCard = ({ title, value, unit, status, icon: Icon, color = "text-emerald-400" }) => {
   return (

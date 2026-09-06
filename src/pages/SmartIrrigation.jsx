@@ -1,15 +1,8 @@
 import React from 'react';
 import { useTelemetry } from '../context/TelemetryContext';
 import { useFarm } from '../context/FarmContext';
-import { 
-  Droplets, 
-  Zap, 
-  Sliders, 
-  CloudRain, 
-  CheckCircle, 
-  AlertTriangle,
-  Waves
-} from 'lucide-react';
+import { InteractiveFarmMap } from '../components/map/InteractiveFarmMap';
+import { Droplets, Zap, Sliders, Activity } from 'lucide-react';
 
 export const SmartIrrigation = () => {
   const { telemetry, togglePump, setIrrigationMode } = useTelemetry();
@@ -145,6 +138,18 @@ export const SmartIrrigation = () => {
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Moisture Spatial Contour Grid Map */}
+      <div className="space-y-3">
+        <h3 className="text-lg font-bold text-slate-100 flex items-center space-x-2">
+          <Activity className="w-5 h-5 text-emerald-400" />
+          <span>Zone Moisture Contour & Irrigation Target Map</span>
+        </h3>
+        <p className="text-xs text-slate-400">
+          Inspect soil moisture contours across custom grid zones (A1-D4). Red zones indicate dry soil requiring drip line activation.
+        </p>
+        <InteractiveFarmMap farm={selectedFarm} height="520px" allowEdit={false} />
       </div>
     </div>
   );

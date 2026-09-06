@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Plus, X, Sprout, MapPin } from 'lucide-react';
+import { Plus, X } from 'lucide-react';
 import { useFarm } from '../../context/FarmContext';
 
 export const AddFarm = ({ onClose }) => {

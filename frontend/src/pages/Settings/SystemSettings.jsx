@@ -1,5 +1,5 @@
 import React from 'react';
-import { Cpu, Wifi } from 'lucide-react';
+import { Cpu } from 'lucide-react';
 
 export const SystemSettings = () => {
   return (

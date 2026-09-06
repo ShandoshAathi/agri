@@ -1,10 +1,10 @@
 import React from 'react';
-import { Sprout, Bell, User, ShieldCheck, LogOut } from 'lucide-react';
+import { Sprout, ShieldCheck, LogOut } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { useFarm } from '../../context/FarmContext';
 
-export const Header = ({ currentPage, setCurrentPage }) => {
-  const { user, role, switchRole, logout } = useAuth();
+export const Header = ({ _currentPage, _setCurrentPage }) => {
+  const { _user, role, switchRole, logout } = useAuth();
   const { farms, activeFarm, setActiveFarm } = useFarm();
 
   return (

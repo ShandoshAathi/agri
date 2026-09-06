@@ -161,7 +161,7 @@ export const Dashboard = ({ setCurrentPage }) => {
                 onClick={() => setCurrentPage('diagnosis')}
                 className="p-3 rounded-xl bg-slate-900/80 hover:bg-slate-800/90 border border-slate-700/80 hover:border-emerald-500/50 text-left transition-all group"
               >
-                <Scan className="w-5 h-5 text-cyan-400 mb-2 group-hover:scale-110 transition-transform" />
+                <Scan className="w-5 h-5 text-emerald-400 mb-2 group-hover:scale-110 transition-transform" />
                 <p className="text-xs font-bold text-slate-200">Disease Diagnosis</p>
                 <p className="text-[10px] text-slate-400 mt-0.5">Upload leaf image for AI scan</p>
               </button>
@@ -170,7 +170,7 @@ export const Dashboard = ({ setCurrentPage }) => {
                 onClick={() => setCurrentPage('analytics')}
                 className="p-3 rounded-xl bg-slate-900/80 hover:bg-slate-800/90 border border-slate-700/80 hover:border-emerald-500/50 text-left transition-all group"
               >
-                <TrendingUp className="w-5 h-5 text-teal-300 mb-2 group-hover:scale-110 transition-transform" />
+                <TrendingUp className="w-5 h-5 text-emerald-400 mb-2 group-hover:scale-110 transition-transform" />
                 <p className="text-xs font-bold text-slate-200">Analytics & Trends</p>
                 <p className="text-[10px] text-slate-400 mt-0.5">Water usage & temp graphs</p>
               </button>

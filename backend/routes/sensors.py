@@ -1,7 +1,5 @@
 from fastapi import APIRouter, WebSocket, WebSocketDisconnect
-from schemas.payload import PumpControlPayload
 from services.telemetry_service import telemetry_service
-from mqtt.client import mqtt_client
 from websocket.manager import ws_manager
 import asyncio
 import json
@@ -12,11 +10,12 @@ router = APIRouter()
 def get_telemetry(farm_id: str):
     return telemetry_service.get_current(farm_id)
 
-@router.post("/pump/{farm_id}")
-def control_pump(farm_id: str, payload: PumpControlPayload):
-    status = telemetry_service.set_pump(payload.action)
-    mqtt_client.publish_pump_command(payload.action)
-    return {"status": "success", "farm_id": farm_id, "pump_status": status}
+@router.get("/history/{farm_id}")
+def get_sensor_history(farm_id: str):
+    return [
+        {"timestamp": "2026-08-05T10:00:00Z", "soil_moisture": 42.1, "temperature": 28.4, "humidity": 64.0, "soil_ph": 6.8},
+        {"timestamp": "2026-08-05T10:05:00Z", "soil_moisture": 41.8, "temperature": 28.6, "humidity": 63.5, "soil_ph": 6.8}
+    ]
 
 @router.websocket("/ws/telemetry")
 async def websocket_endpoint(websocket: WebSocket):

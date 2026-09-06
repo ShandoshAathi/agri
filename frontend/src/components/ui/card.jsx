@@ -1,0 +1,37 @@
+import React from 'react';
+
+export const Card = ({ children, className = '', ...props }) => (
+  <div className={`rounded-3xl border border-stone-200 bg-white text-stone-900 shadow-sm overflow-hidden ${className}`} {...props}>
+    {children}
+  </div>
+);
+
+export const CardHeader = ({ children, className = '', ...props }) => (
+  <div className={`flex flex-col space-y-1.5 p-6 ${className}`} {...props}>
+    {children}
+  </div>
+);
+
+export const CardTitle = ({ children, className = '', ...props }) => (
+  <h3 className={`text-lg font-extrabold tracking-tight ${className}`} {...props}>
+    {children}
+  </h3>
+);
+
+export const CardDescription = ({ children, className = '', ...props }) => (
+  <p className={`text-xs text-stone-500 font-medium ${className}`} {...props}>
+    {children}
+  </p>
+);
+
+export const CardContent = ({ children, className = '', ...props }) => (
+  <div className={`p-6 pt-0 ${className}`} {...props}>
+    {children}
+  </div>
+);
+
+export const CardFooter = ({ children, className = '', ...props }) => (
+  <div className={`flex items-center p-6 pt-0 ${className}`} {...props}>
+    {children}
+  </div>
+);

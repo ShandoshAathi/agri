@@ -1,5 +1,5 @@
 import React from 'react';
-import { Sprout, Bell, User, Search } from 'lucide-react';
+import { Sprout, Bell, Search } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 
 export const Navbar = ({ onSearch }) => {

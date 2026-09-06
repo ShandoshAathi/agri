@@ -1,3 +1,4 @@
+/* eslint-disable react/only-export-components, react-refresh/only-export-components */
 import React, { createContext, useContext, useState } from 'react';
 
 const FarmContext = createContext();
@@ -115,21 +116,23 @@ export const FarmProvider = ({ children }) => {
     setNotifications([]);
   };
 
+  const value = React.useMemo(() => ({
+    farms,
+    selectedFarm,
+    selectedFarmId,
+    setSelectedFarmId,
+    addFarm,
+    devices,
+    addDevice,
+    notifications,
+    markNotificationRead,
+    clearAllNotifications,
+    settings,
+    setSettings
+  }), [farms, selectedFarm, selectedFarmId, devices, notifications, settings]);
+
   return (
-    <FarmContext.Provider value={{
-      farms,
-      selectedFarm,
-      selectedFarmId,
-      setSelectedFarmId,
-      addFarm,
-      devices,
-      addDevice,
-      notifications,
-      markNotificationRead,
-      clearAllNotifications,
-      settings,
-      setSettings
-    }}>
+    <FarmContext.Provider value={value}>
       {children}
     </FarmContext.Provider>
   );

@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: ../..
+      dockerfile: deployment/Docker/Dockerfile.frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+
+  backend:
+    build:
+      context: ../..
+      dockerfile: deployment/Docker/Dockerfile.backend
+    ports:
+      - "8000:8000"
+    environment:
+      - PORT=8000
+      - PROJECT_NAME=AgriSense AI

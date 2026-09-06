@@ -1,0 +1,6 @@
+CompileFlags:
+  Add:
+    - "-Id:/agri 3/iot/esp32/include"
+    - "-Id:/agri 3/iot/esp32"
+    - "-DESP32"
+    - "-DARDUINO=10800"

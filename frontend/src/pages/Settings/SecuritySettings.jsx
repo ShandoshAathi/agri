@@ -1,5 +1,5 @@
 import React from 'react';
-import { ShieldCheck, Key } from 'lucide-react';
+import { ShieldCheck } from 'lucide-react';
 
 export const SecuritySettings = () => {
   return (

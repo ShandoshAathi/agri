@@ -15,7 +15,7 @@ import {
   Layers
 } from 'lucide-react';
 
-export const Header = ({ currentPage, setCurrentPage }) => {
+export const Header = ({ _currentPage, setCurrentPage }) => {
   const { user, role, switchRole, logout } = useAuth();
   const { farms, selectedFarmId, setSelectedFarmId, notifications, markNotificationRead } = useFarm();
   const { telemetry } = useTelemetry();

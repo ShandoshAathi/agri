@@ -1,3 +1,4 @@
+/* eslint-disable react/only-export-components, react-refresh/only-export-components */
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { useFarm } from './FarmContext';
 
@@ -19,7 +20,7 @@ export const TelemetryProvider = ({ children }) => {
     lastUpdated: new Date().toLocaleTimeString(),
   });
 
-  const [telemetryHistory, setTelemetryHistory] = useState([
+  const [telemetryHistory, _setTelemetryHistory] = useState([
     { time: '12:00', temp: 25.1, moisture: 45, humidity: 68, ph: 6.4 },
     { time: '12:15', temp: 25.8, moisture: 43, humidity: 66, ph: 6.4 },
     { time: '12:30', temp: 26.4, moisture: 41, humidity: 65, ph: 6.5 },
@@ -73,14 +74,32 @@ export const TelemetryProvider = ({ children }) => {
     return () => clearInterval(interval);
   }, [settings]);
 
+  const currentReading = React.useMemo(() => ({
+    soil_moisture: telemetry.soilMoisture,
+    soilMoisture: telemetry.soilMoisture,
+    temperature: telemetry.temperature,
+    humidity: telemetry.humidity,
+    soil_ph: telemetry.soilPh,
+    soilPh: telemetry.soilPh,
+    water_tank_level: telemetry.waterTankLevel,
+    waterTankLevel: telemetry.waterTankLevel,
+    pump_status: telemetry.pumpStatus,
+    pumpStatus: telemetry.pumpStatus,
+    rain_detected: telemetry.rainDetected,
+    rainDetected: telemetry.rainDetected,
+  }), [telemetry]);
+
+  const value = React.useMemo(() => ({
+    telemetry,
+    currentReading,
+    telemetryHistory,
+    togglePump,
+    setIrrigationMode,
+    setTelemetry
+  }), [telemetry, currentReading, telemetryHistory]);
+
   return (
-    <TelemetryContext.Provider value={{
-      telemetry,
-      telemetryHistory,
-      togglePump,
-      setIrrigationMode,
-      setTelemetry
-    }}>
+    <TelemetryContext.Provider value={value}>
       {children}
     </TelemetryContext.Provider>
   );

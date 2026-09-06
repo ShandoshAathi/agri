@@ -1,0 +1,10 @@
+# Supabase Local Development Configuration
+project_id = "agrisense-ai"
+
+[api]
+enabled = true
+port = 54321
+
+[db]
+port = 54322
+shadow_port = 54323

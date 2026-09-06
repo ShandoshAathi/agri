@@ -1,5 +1,5 @@
 import React from 'react';
-import { Sprout, Info, Droplets, Sun, Calendar } from 'lucide-react';
+import { Sprout } from 'lucide-react';
 
 export const CropDetails = ({ cropName = "Tomato (Hybrid Rome)" }) => {
   return (

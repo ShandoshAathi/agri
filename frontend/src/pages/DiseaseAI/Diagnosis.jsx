@@ -1,5 +1,4 @@
 import React from 'react';
-import { AlertTriangle, CheckCircle, ShieldCheck } from 'lucide-react';
 
 export const Diagnosis = ({ result }) => {
   if (!result) return null;
@@ -7,30 +6,30 @@ export const Diagnosis = ({ result }) => {
   const isHealthy = result.disease?.includes('Healthy');
 
   return (
-    <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-4">
-      <div className="flex items-center justify-between border-b border-slate-800 pb-4">
+    <div className="bg-white border border-stone-200 rounded-2xl p-6 shadow-sm space-y-4 eco-card font-sans">
+      <div className="flex items-center justify-between border-b border-stone-200 pb-4">
         <div>
-          <span className="text-xs text-slate-400 font-semibold uppercase tracking-wider block">Computer Vision Diagnosis</span>
-          <h3 className="text-xl font-bold text-slate-100 mt-0.5">{result.disease}</h3>
+          <span className="text-xs text-emerald-800 font-extrabold uppercase tracking-wider block">Computer Vision Diagnosis</span>
+          <h3 className="text-xl font-black text-stone-900 mt-0.5 font-['Manrope',_sans-serif]">{result.disease}</h3>
         </div>
-        <span className={`px-3 py-1 text-xs font-bold rounded-full border ${
+        <span className={`px-3 py-1 text-xs font-black rounded-full border shadow-2xs ${
           isHealthy 
-            ? 'bg-emerald-950/80 text-emerald-400 border-emerald-800' 
-            : 'bg-rose-950/80 text-rose-400 border-rose-800'
+            ? 'bg-lime-400 text-emerald-950 border-lime-500' 
+            : 'bg-rose-100 text-rose-900 border-rose-300'
         }`}>
           {result.severity}
         </span>
       </div>
 
       <div className="space-y-3 text-xs">
-        <div className="p-3 bg-slate-950/60 border border-slate-800 rounded-xl space-y-1">
-          <span className="text-slate-400 font-bold block uppercase">Recommended Immediate Action</span>
-          <p className="text-slate-200">{result.treatment}</p>
+        <div className="p-3 bg-stone-100 border border-stone-200 rounded-xl space-y-1">
+          <span className="text-stone-700 font-bold block uppercase tracking-wider">Recommended Immediate Action</span>
+          <p className="text-stone-900 font-medium">{result.treatment}</p>
         </div>
 
-        <div className="p-3 bg-slate-950/60 border border-slate-800 rounded-xl space-y-1">
-          <span className="text-slate-400 font-bold block uppercase">Preventative Guidance</span>
-          <p className="text-slate-200">{result.prevention}</p>
+        <div className="p-3 bg-stone-100 border border-stone-200 rounded-xl space-y-1">
+          <span className="text-stone-700 font-bold block uppercase tracking-wider">Preventative Guidance</span>
+          <p className="text-stone-900 font-medium">{result.prevention}</p>
         </div>
       </div>
     </div>

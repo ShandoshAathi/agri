@@ -1,5 +1,5 @@
 import React from 'react';
-import { BarChart3 } from 'lucide-react';
+
 
 export const AnalyticsCard = ({ title, value, change }) => {
   return (

@@ -1,5 +1,5 @@
 import React from 'react';
-import { MapPin, Sprout } from 'lucide-react';
+import { MapPin } from 'lucide-react';
 
 export const FarmCard = ({ name, location, crop, acres, healthScore }) => {
   return (

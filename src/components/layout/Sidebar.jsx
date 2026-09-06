@@ -1,21 +1,6 @@
 import React from 'react';
 import { useAuth } from '../../context/AuthContext';
-import { 
-  LayoutDashboard, 
-  Tractor, 
-  Activity, 
-  Sprout, 
-  Scan, 
-  Droplets, 
-  BarChart3, 
-  FileText, 
-  Bell, 
-  Settings, 
-  User,
-  ChevronRight,
-  Sparkles,
-  Zap
-} from 'lucide-react';
+import { LayoutDashboard, Tractor, Activity, Sprout, Scan, Droplets, BarChart3, FileText, Bell, Settings, User, ChevronRight } from 'lucide-react';
 
 export const Sidebar = ({ currentPage, setCurrentPage, collapsed, setCollapsed }) => {
   const { role } = useAuth();
@@ -42,7 +27,7 @@ export const Sidebar = ({ currentPage, setCurrentPage, collapsed, setCollapsed }
     }`}>
       {/* Navigation List */}
       <div className="p-3 space-y-1">
-        {filteredItems.map((item, index) => {
+        {filteredItems.map((item, _index) => {
           const Icon = item.icon;
           const isActive = currentPage === item.id;
 

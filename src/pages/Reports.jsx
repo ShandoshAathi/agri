@@ -1,12 +1,5 @@
 import React, { useState } from 'react';
-import { 
-  FileText, 
-  Download, 
-  CheckCircle, 
-  Calendar, 
-  Filter,
-  FileSpreadsheet
-} from 'lucide-react';
+import { FileText, Download, Calendar } from 'lucide-react';
 
 export const Reports = () => {
   const [downloading, setDownloading] = useState(null);
@@ -22,8 +15,34 @@ export const Reports = () => {
     setDownloading(id);
     setTimeout(() => {
       setDownloading(null);
-      alert(`Report export generated successfully for ${id.toUpperCase()} report format!`);
-    }, 1500);
+      // Generate real downloadable CSV file content
+      let csvContent = 'data:text/csv;charset=utf-8,';
+      if (id === 'daily') {
+        csvContent += 'Timestamp,Soil Moisture (%),Temperature (C),Humidity (%),Soil pH,Pump State\n';
+        csvContent += '2026-08-22 08:00,42.5,26.4,62,6.4,OFF\n';
+        csvContent += '2026-08-22 10:00,38.1,28.9,58,6.4,ON\n';
+        csvContent += '2026-08-22 12:00,52.0,30.5,54,6.5,OFF\n';
+      } else if (id === 'weekly') {
+        csvContent += 'Day,Water Consumed (Liters),Pump Active Duration (Minutes),Efficiency Rating\n';
+        csvContent += 'Monday,420,45,98%\nTuesday,380,40,99%\nWednesday,510,55,96%\nThursday,290,30,100%\nFriday,460,50,97%\n';
+      } else if (id === 'disease') {
+        csvContent += 'Scan ID,Crop Plot,Pathogen Identified,Severity,Treatment Action,Scan Date\n';
+        csvContent += 'SCAN-101,Tomato Sector 1,Early Blight (Alternaria solani),Moderate (55%),Copper Fungicide,2026-08-22\n';
+        csvContent += 'SCAN-102,Cucumber Greenhouse,Powdery Mildew,High (78%),Bio Sulfur Spray,2026-08-21\n';
+      } else {
+        csvContent += 'Crop Variety,Acreage,Target Yield,Actual Harvest,Soil pH Compatibility,Profit Margin\n';
+        csvContent += 'Tomato (Hybrid Rome),4.5 Acres,28.5 Tons/Acre,29.2 Tons/Acre,Perfect (6.4),$14500\n';
+        csvContent += 'Bell Pepper,2.0 Acres,22.0 Tons/Acre,21.8 Tons/Acre,Optimal (6.5),$8900\n';
+      }
+      
+      const encodedUri = encodeURI(csvContent);
+      const link = document.createElement('a');
+      link.setAttribute('href', encodedUri);
+      link.setAttribute('download', `AgriSense_${id.toUpperCase()}_Report.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }, 1200);
   };
 
   return (

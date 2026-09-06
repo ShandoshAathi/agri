@@ -1,5 +1,5 @@
 import React from 'react';
-import { ShieldCheck, Pill, CheckCircle } from 'lucide-react';
+import { Pill } from 'lucide-react';
 
 export const Treatment = ({ treatmentText }) => {
   return (

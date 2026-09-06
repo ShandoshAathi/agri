@@ -15,9 +15,9 @@ import {
 export const Login = ({ onNavigateToDashboard, onNavigateToRegister }) => {
   const { login } = useAuth();
 
-  const [email, setEmail] = useState(initialUsers.manager.email);
+  const [email, setEmail] = useState(initialUsers.farmer.email);
   const [password, setPassword] = useState('password123');
-  const [selectedRole, setSelectedRole] = useState('manager');
+  const [selectedRole, setSelectedRole] = useState('farmer');
   const [showPassword, setShowPassword] = useState(false);
   const [showForgotModal, setShowForgotModal] = useState(false);
   const [resetEmail, setResetEmail] = useState('');

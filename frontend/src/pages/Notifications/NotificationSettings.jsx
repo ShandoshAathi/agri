@@ -1,5 +1,5 @@
 import React from 'react';
-import { Settings, Bell, Mail, Smartphone } from 'lucide-react';
+import { Settings } from 'lucide-react';
 
 export const NotificationSettings = () => {
   return (

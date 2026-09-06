@@ -1,5 +1,5 @@
 import React from 'react';
-import { Sun, Wind, Droplets } from 'lucide-react';
+import { Sun } from 'lucide-react';
 
 export const WeatherCard = ({ temp = "26.4°C", humidity = "64%", condition = "Partly Sunny" }) => {
   return (
